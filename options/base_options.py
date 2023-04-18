@@ -129,6 +129,9 @@ class BaseOptions():
         str_ids = opt.gpu_ids.split(',')
         opt.gpu_ids = []
         for str_id in str_ids:
+            # if str_id == "mps":
+            #     torch.set_device(str_id)
+            #     break
             id = int(str_id)
             if id >= 0:
                 opt.gpu_ids.append(id)
