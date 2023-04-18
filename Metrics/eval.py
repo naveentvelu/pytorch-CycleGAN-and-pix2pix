@@ -11,8 +11,6 @@ import numpy as np
 from PIL import Image
 import os
 
-# folder_3 = "/Users/naveenthangavelu/Documents/MScAC/Neural networks and Deep Learning/Project/Metrics/diff_test"
-
 def compare_folders(folder1, folder2):
     ssim_sum = 0
     num_images = 0
@@ -47,36 +45,32 @@ def compare_folders(folder1, folder2):
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-s', '--src', type=str, help='Ground truth images directory')
-    # parser.add_argument('-d', '--dst', type=str, help='Generate images directory')
-   
-    # ''' parser configs '''
-    # args = parser.parse_args()
+
+    # Correctly mention the source and destination folders.
 
     root_folder = 'test_latest/images_final/'
     real_A = 'real_A'
     real_B = 'real_B'
     fake_B = 'fake_B'
 
-    # print("Pix2Pix : ")
+    print("Pix2Pix : ")
     
-    # # # Metric FID
-    # fid_score = fid.compute_fid(root_folder + real_B, root_folder + fake_B, device='cpu', num_workers=0)
-    # print('FID: {}'.format(fid_score))
+    # # Metric FID
+    fid_score = fid.compute_fid(root_folder + real_B, root_folder + fake_B, device='cpu', num_workers=0)
+    print('FID: {}'.format(fid_score))
 
-    # ssim = compare_folders(root_folder + real_B, root_folder + fake_B)
-    # print('ssim = {}'.format(ssim))
+    ssim = compare_folders(root_folder + real_B, root_folder + fake_B)
+    print('ssim = {}'.format(ssim))
 
-    # print("Diffusion : ")
+    print("Diffusion : ")
 
-    # diff_folder = "/Users/naveenthangavelu/Documents/MScAC/Neural networks and Deep Learning/Project/Metrics/diff_test_resized"
+    diff_folder = "/Users/naveenthangavelu/Documents/MScAC/Neural networks and Deep Learning/Project/Metrics/diff_test_resized"
 
-    # fid_score = fid.compute_fid(root_folder + real_B, diff_folder, device='cpu', num_workers=0)
-    # print('FID: {}'.format(fid_score))
+    fid_score = fid.compute_fid(root_folder + real_B, diff_folder, device='cpu', num_workers=0)
+    print('FID: {}'.format(fid_score))
 
-    # ssim = compare_folders(root_folder + real_B, diff_folder)
-    # print('ssim = {}'.format(ssim))
+    ssim = compare_folders(root_folder + real_B, diff_folder)
+    print('ssim = {}'.format(ssim))
 
     print("Cycle GAN : ")
 
@@ -87,13 +81,5 @@ if __name__ == '__main__':
 
     ssim = compare_folders(root_folder + real_B, diff_folder)
     print('ssim = {}'.format(ssim))
-
-    # # Inception Score
-    # is_mean, is_std = inception_score(BaseDataset(root_folder + fake_B), cuda=False, batch_size = 32, resize=True, splits=10)
-    # print('IS: {} {}'.format(is_mean, is_std))
-
-    # # Perceptual Distance
-    # pd = perceptual_distance(BaseDataset(root_folder + real_B), BaseDataset(root_folder + fake_B), cuda=False, batch_size = 32, resize=True)
-    # print('PD: {}'.format(pd))
 
 
